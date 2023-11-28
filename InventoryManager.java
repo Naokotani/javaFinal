@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import entities.*;
 
-class BookManager{
+class InventoryManager{
 	public static void main(String[] args) {
 		Books books = new Books();
 		Orders orders = new Orders();
@@ -14,8 +14,8 @@ class BookManager{
 
 		while (run == true) {
 			System.out.println("Enter the correspoding letter to perform action.");
-			System.out.println("n: New, l: List, u: Update, d: Delete, e: Exit");
-			String options = "b: book, a: author, c: customer, o: order";
+			System.out.println("n: New, l: List, u: Update, d: Delete, e: Exit\n");
+			String options = "b: book, a: author, c: customer, o: order\n";
 
 			char res = input.next().charAt(0);
 

@@ -7,16 +7,19 @@ public class Books {
 	class Book {
 		String title;
 		int book_id;
-		int author_id;
+		String author_name;
+		int quantity;
 		String genre;
 		double price;
 		
-		public Book(String title, int book_id, int author_id, String genre, double price) {
+		public Book(String title, int book_id, String author_name,
+					String genre, double price, int quantity) {
 			this.title = title;
 			this.book_id = book_id;
-			this.author_id = author_id;
+			this.author_name = author_name;
 			this.genre = genre;
 			this.price = price;
+			this.quantity = quantity;
 		}
 	}
 
@@ -25,9 +28,11 @@ public class Books {
 	public String input(Scanner input) {
 		String title;
 		int book_id;
-		int author_id;
+		String author_name;
 		String genre;
 		double price;
+		int quantity;
+
 		String fail = "Book creation failed";
 
 		try {
@@ -49,9 +54,8 @@ public class Books {
 		}
 
 		try {
-		System.out.print("Author ID: ");
-		author_id = input.nextInt();
-		input.nextLine();
+		System.out.print("Author name: ");
+		author_name = input.nextLine();
 		} catch(Exception e) {
 			System.out.println(e);
 			return fail;
@@ -73,7 +77,16 @@ public class Books {
 			return fail;
 		}
 
-		Book book = new Book(title, book_id, author_id, genre, price); 
+		try {
+		System.out.print("Quanity: ");
+		quantity = input.nextInt();
+		} catch(Exception e) {
+			System.out.println(e);
+			return fail;
+		}
+
+		Book book = new Book(title, book_id, author_name,
+							 genre, price, quantity); 
 
 		books.add(book);
 
@@ -81,13 +94,19 @@ public class Books {
 	} 
 
 	public void list(){
+		System.out.println("Current Inventory");
+		System.out.println("*****************\n\n");
 		for (Book i: books) {
 			System.out.println("ISBN: " + i.book_id);
 			System.out.println("Title: " + i.title);
-			System.out.println("Author ID: " + i.author_id);
+			System.out.println("Author name: " + i.author_name);
 			System.out.println("Genre: " + i.genre);
 			System.out.println("Price: " + i.price);
+			System.out.println("Quantity: " + i.quantity);
+		System.out.println("\n");
 		}
+		System.out.println("\n*****************\n\n");
+
 	}
 
 	public String update() {

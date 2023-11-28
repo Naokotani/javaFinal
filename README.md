@@ -1,7 +1,9 @@
-#Inventory Manager
+# Inventory Manager
 
 Simple command line bookstore inventory manager. The current state satisfies the requirements of the programming assignment 3.
 
+## Setup
+Just run `javac InventoryManager.java` and `java InventoryManager`.
 
 ## Storage
 
