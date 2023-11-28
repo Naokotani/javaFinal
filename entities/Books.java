@@ -109,6 +109,38 @@ public class Books {
 
 	}
 
+	public double getBookPrice(int id) {
+		double price = 0.0;
+		for (Book i: books) {
+			if (id == i.book_id) {
+				price = i.price;
+			} 
+		}
+
+		if (price == 0.0) {
+			System.out.println("Book ID invalid: " + id);
+		}
+		return price;
+	}
+
+	public Boolean updateStock(int id, int quantity) {
+		Boolean isStock = false;
+
+		itemFound:
+		for (Book i: books) {
+			if (id == i.book_id) {
+				if (quantity <= i.quantity){
+					i.quantity -= quantity;
+					isStock = true;
+					System.out.println("\n**************************\n");
+					System.out.println("Remaining stock: " + i.quantity);
+					break itemFound;
+				}
+			} 
+		}
+		return isStock;
+	}
+
 	public String update() {
 		return "Not yet implemented";
 	}

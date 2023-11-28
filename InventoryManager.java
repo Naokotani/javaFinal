@@ -14,9 +14,10 @@ class InventoryManager{
 
 		while (run == true) {
 			System.out.println("Enter the correspoding letter to perform action.");
-			System.out.println("n: New, l: List, u: Update, d: Delete, e: Exit\n");
+			System.out.println("n: New, l: List, u: Update, s: Sales Report, d: Delete, e: Exit\n");
 			String options = "b: book, a: author, c: customer, o: order\n";
 
+			System.out.print("> ");
 			char res = input.next().charAt(0);
 
 			switch (res) {
@@ -35,6 +36,14 @@ class InventoryManager{
 				System.out.println(options);
 				update(input, books, orders, authors, customers);
 				break;
+			case 's':
+				System.out.println(options);
+				String[] saleArray = orders.sales(books);
+				System.out.println("**************************\n");
+				System.out.println("Books sold: " + saleArray[0]);
+				System.out.println("Total sales: " + saleArray[1]);
+				System.out.println("\n**************************\n");
+				break;
 			case 'd':
 				System.out.println("Which would you like to delete?");
 				System.out.println(options);
@@ -51,6 +60,7 @@ class InventoryManager{
 		
 	static void create(Scanner input, Books books, Orders orders,
 					   Authors authors, Customers customers){
+		System.out.print("> ");
 		char res = input.next().charAt(0);
 		
 		switch (res) {
@@ -67,7 +77,7 @@ class InventoryManager{
 			break;
 				
 		case 'o':
-			orders.input(input);
+			System.out.println(orders.input(input, books));
 			break;
 		}
 	}
@@ -75,8 +85,8 @@ class InventoryManager{
 
 	static void read(Scanner input, Books books, Orders orders,
 					 Authors authors, Customers customers) {
+		System.out.print("> ");
 		char res = input.next().charAt(0);
-		input.nextLine();
 
 		switch (res) {
 		case 'b':
@@ -101,8 +111,8 @@ class InventoryManager{
 	static void update(Scanner input, Books books, Orders orders,
 					   Authors authors, Customers customers) {
 
+		System.out.print("> ");
 		char res = input.next().charAt(0);
-		input.nextLine();
 
 		switch (res) {
 		case 'b':
@@ -125,6 +135,7 @@ class InventoryManager{
 
 	static void destroy(Scanner input, Books books, Orders orders,
 					   Authors authors, Customers customers) {
+		System.out.print("> ");
 		char res = input.next().charAt(0);
 		input.nextLine();
 

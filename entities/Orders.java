@@ -27,7 +27,7 @@ public class Orders {
 
 	ArrayList<Order> orders = new ArrayList<>();
 
-	public String input(Scanner input) {
+	public String input(Scanner input, Books books) {
 
 		int order_id;
 		int customer_id;
@@ -80,14 +80,22 @@ public class Orders {
 			return fail;
 		}
 
-		Order order = new Order(order_id,
-								customer_id,
-								book_id,
-								order_date,
-								quantity);
-		orders.add(order);
+		Boolean stockRemaining = books.updateStock(book_id, quantity);
 
-		return "Order created successfully.";
+		if (stockRemaining) {
+			Order order = new Order(order_id,
+									customer_id,
+									book_id,
+									order_date,
+									quantity);
+			orders.add(order);
+
+			return "Order created successfully.\n\n" +
+				"**************************\n";
+		} else {
+			return "Insufficient stock\n\n";
+		}
+
 	} 
 	
 	public void list(){
@@ -98,6 +106,19 @@ public class Orders {
 			System.out.println("Date Ordered: " + i.order_date);
 			System.out.println("Quantity: " + i.quantity);
 		}
+	}
+
+	public String[] sales(Books books) {
+		int quantity = 0;
+		double totalSales = 0.0;
+
+		for (Order i: orders) {
+			quantity += i.quantity;
+			totalSales += books.getBookPrice(i.book_id) * i.quantity;
+		}
+
+		String[] sales = {Integer.toString(quantity), Double.toString(totalSales)};
+		return sales;
 	}
 	
 	public String update() {
