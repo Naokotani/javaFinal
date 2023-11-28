@@ -55,7 +55,7 @@ public class Orders {
 		}
 
 		try{
-		System.out.print("Book ID: ");
+		System.out.print("ISBN: ");
 		book_id = input.nextInt();
 		input.nextLine();
 		} catch(Exception e) {
@@ -66,6 +66,7 @@ public class Orders {
 		try{
 		System.out.print("Order Date: ");
 		order_date = input.next();
+		input.nextLine();
 		} catch(Exception e) {
 			System.out.println(e);
 			return fail;

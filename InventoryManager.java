@@ -15,10 +15,9 @@ class InventoryManager{
 		while (run == true) {
 			System.out.println("Enter the correspoding letter to perform action.");
 			System.out.println("n: New, l: List, u: Update, s: Sales Report, d: Delete, e: Exit\n");
-			String options = "b: book, a: author, c: customer, o: order\n";
-
 			System.out.print("> ");
 			char res = input.next().charAt(0);
+			String options = "b: book, a: author, c: customer, o: order\n";
 
 			switch (res) {
 			case 'n':
@@ -54,7 +53,6 @@ class InventoryManager{
 			}
 
 		}
-
 		input.close();
 	} 
 		
@@ -67,15 +65,12 @@ class InventoryManager{
 		case 'b':
 			books.input(input);
 			break;
-			
 		case 'a':
 			authors.input(input);
 			break;
-			
 		case 'c':
 			customers.input(input);
 			break;
-				
 		case 'o':
 			System.out.println(orders.input(input, books));
 			break;
@@ -92,15 +87,12 @@ class InventoryManager{
 		case 'b':
 			books.list();
 			break;
-
 		case 'a':
 			authors.list();
 			break;
-
 		case 'c':
 			customers.list();
 			break;
-
 		case 'o':
 			orders.list();
 			break;
@@ -118,15 +110,12 @@ class InventoryManager{
 		case 'b':
 			books.list();
 			break;
-
 		case 'a':
 			authors.list();
 			break;
-
 		case 'c':
 			customers.list();
 			break;
-
 		case 'o':
 			orders.list();
 			break;
@@ -143,19 +132,15 @@ class InventoryManager{
 		case 'b':
 			books.list();
 			break;
-
 		case 'a':
 			authors.list();
 			break;
-
 		case 'c':
 			customers.list();
 			break;
-
 		case 'o':
 			orders.list();
 			break;
 		}
-
 	}
 }

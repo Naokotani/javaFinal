@@ -36,7 +36,7 @@ public class Books {
 		String fail = "Book creation failed";
 
 		try {
-		System.out.print("Book ID: ");
+		System.out.print("ISBN: ");
 		book_id = input.nextInt();
 		input.nextLine();
 		} catch(Exception e) {
