@@ -15,7 +15,7 @@ public class Input {
 				validation = false;
 			}
 		}
-		return "Input Error";
+		return null;
 	}
 
 	public char getChar(String msg) {

@@ -77,24 +77,86 @@ public class Books {
 
 	public Boolean updateStock(int id, int quantity) {
 		Boolean isStock = false;
-
-		itemFound:
-		for (Book i: books) {
-			if (id == i.book_id) {
-				if (quantity <= i.quantity){
-					i.quantity -= quantity;
-					isStock = true;
-					System.out.println("\n**************************\n");
-					System.out.println("Remaining stock: " + i.quantity);
-					break itemFound;
-				}
-			} 
+		Book b = getBook(id);
+		if (quantity <= b.quantity){
+			b.quantity -= quantity;
+			isStock = true;
+			System.out.println("\n**************************\n");
+			System.out.println("Remaining stock: " + b.quantity);
 		}
 		return isStock;
 	}
 
-	public String update() {
-		return "Not yet implemented";
+	public String update(Books books, Input in, int id) {
+		Book book = getBook(id);
+		System.out.println("Which element would you like to update?");
+		System.out.println("i: ISBN, t: Title, a: Author name, g: genre, p: price, q: quantity");
+		String success = "Update successful";
+
+		if (book == null) {
+			return "Can't find book with ISBN: " + id;
+		} 
+
+		switch(in.getChar("> ")) {
+		case 'i':
+			int newId = in.getInt("Enter new ID: ");
+			if (in.validation) {
+				book.book_id = newId;
+				return success;
+			}
+			break;
+		case 't':
+			String newTitle = in.getString("Enter new title: ");
+			if (in.validation) {
+				book.title = newTitle;
+				return success;
+			}
+			break;
+		case 'a':
+			String newName = in.getString("Enter new Author Name: ");
+			if (in.validation) {
+				book.author_name = newName;
+				return success;
+			}
+			break;
+		case 'g':
+			String newGenre = in.getString("Enter new genre: ");
+			if (in.validation) {
+				book.genre = newGenre;
+				return success;
+			}
+			break;
+		case 'p':
+			double newPrice = in.getDouble("Enter new price: ");
+			if (in.validation) {
+				book.price = newPrice;
+				return success;
+			}
+			break;
+		case 'q':
+			int newQuant = in.getInt("Enter new quantity: ");
+			if (in.validation) {
+				book.quantity = newQuant;
+				return success;
+			}
+			break;
+		default:
+			System.out.println("I didn't catch that.");
+			break;
+			
+		}
+		in.validation = true;
+		return "Update Failed";
+
+	}
+
+	public Book getBook(int id) {
+		for (Book i: books) {
+			if (id == i.book_id) {
+				return i;
+			}
+		}
+		return null;
 	}
 
 	public String destroy() {

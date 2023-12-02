@@ -73,9 +73,12 @@ class InventoryManager{
 	static void update(Input in, Books books, Orders orders) {
 		switch (in.getChar("> ")) {
 		case 'b':
-			books.list();
+			int id = in.getChar("Enter book ID: ");
+			books.update(books, in, id);
 			break;
 		case 'o':
+			// int id = in.getChar("Enter order ID: ");
+			// orders.update(in, id);
 			orders.list();
 			break;
 		}
