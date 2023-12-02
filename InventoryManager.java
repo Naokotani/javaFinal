@@ -71,26 +71,29 @@ class InventoryManager{
 	}
 	
 	static void update(Input in, Books books, Orders orders) {
+		int id;
 		switch (in.getChar("> ")) {
 		case 'b':
-			int id = in.getChar("Enter book ID: ");
-			books.update(books, in, id);
+			id = in.getInt("Enter book ID: ");
+			System.out.println(books.update(books, in, id));
 			break;
 		case 'o':
-			// int id = in.getChar("Enter order ID: ");
-			// orders.update(in, id);
-			orders.list();
+			id = in.getInt("Enter order ID: ");
+			System.out.println(orders.update(books, in, id));
 			break;
 		}
 	}
 	
 	static void destroy(Input in, Books books, Orders orders) {
+		int id;
 		switch (in.getChar("> ")) {
 		case 'b':
-			books.list();
+			id = in.getInt("Enter book ID: ");
+			System.out.println(books.destroy(in, id));
 			break;
 		case 'o':
-			orders.list();
+			id = in.getInt("Enter order ID: ");
+			System.out.println(orders.destroy(in, id));
 			break;
 		}
 	}

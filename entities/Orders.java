@@ -76,12 +76,101 @@ public class Orders {
 		String[] sales = {Integer.toString(quantity), Double.toString(totalSales)};
 		return sales;
 	}
-	
-	public String update() {
-		return "Not yet implemented";
+	public String update(Books books, Input in, int id) {
+		Order order = getOrder(id);
+		System.out.println("Which element would you like to update?");
+		System.out.println("o: Order ID, c: Customer ID, b: Book ID, d: Order Date, q: quantity");
+		String success = "Update successful";
+
+		if (order == null) {
+			return "Can't find order with ID: " + id;
+		} 
+
+		switch(in.getChar("> ")) {
+		case 'o':
+			int newOrderId = in.getInt("Enter new ID: ");
+			if (in.validation) {
+				order.order_id = newOrderId;
+				return success;
+			}
+			break;
+		case 'c':
+			int newCustId = in.getInt("Enter new Customer ID: ");
+			if (in.validation) {
+				order.customer_id = newCustId;
+				return success;
+			}
+			break;
+		case 'a':
+			int newBookId = in.getInt("Enter new Book ID: ");
+			if (in.validation) {
+				order.book_id = newBookId;
+				return success;
+			}
+			break;
+		case 'd':
+			String newDate = in.getString("Enter new date: ");
+			if (in.validation) {
+				order.order_date = newDate;
+				return success;
+			}
+			break;
+		case 'q':
+			int newQuant = in.getInt("Enter new quantity: ");
+			if (in.validation) {
+				order.quantity = newQuant;
+				return success;
+			}
+			break;
+		default:
+			System.out.println("I didn't catch that.");
+			break;
+			
+		}
+		in.validation = true;
+		return "Update Failed";
+
 	}
 
-	public String destroy() {
-		return "Not yet implemented";
+	public Order getOrder(int id) {
+		for (Order i: orders) {
+			if (id == i.order_id) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	public String destroy(Input in, int id) {
+		Order o = getOrder(id);
+
+		if (!in.validation) {
+			return "Order not found";
+		}
+		in.validation = true;
+
+		if (o != null) {
+			System.out.println("\n*****************\n\n");
+			System.out.println("Order ID: " + o.order_id);
+			System.out.println("Customer ID: " + o.customer_id);
+			System.out.println("Book ID: " + o.book_id);
+			System.out.println("Order date: " + o.order_date);
+			System.out.println("Quantity: " + o.quantity);
+			System.out.println("\n\n*****************\n");
+			System.out.println("Are you sure you want to delete" + o.order_id + "?");
+			System.out.println("y: delete, n: abort");
+		} else {
+			return "Order " + id + " not found";
+		}
+
+		while (true) {
+			char res = in.getChar("> ");
+			if (res == 'y') {
+				orders.remove(o);
+				return "Order Deleted";
+			} else if (res == 'n'){
+				return "aborted";
+			}
+		}
 	}
 }

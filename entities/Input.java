@@ -9,7 +9,7 @@ public class Input {
 		if(validation) {
 			System.out.print(msg);
 			try {
-				return input.next();
+				return input.nextLine();
 			} catch(Exception e) {
 				System.out.println(e);
 				validation = false;
@@ -22,7 +22,7 @@ public class Input {
 		if(validation) {
 			System.out.print(msg);
 			try {
-				return input.next().charAt(0);
+				return input.nextLine().charAt(0);
 			} catch(Exception e) {
 				validation = false;
 				System.out.println(e);
@@ -35,8 +35,8 @@ public class Input {
 		if (validation) {
 			System.out.print(msg);
 			try {
-				int i = input.nextInt();
-				return i;
+				String s = input.nextLine();
+				return Integer.parseInt(s);
 			} catch(Exception e) {
 				System.out.println("\n**Please Enter a number**");
 				validation = false;
@@ -50,7 +50,8 @@ public class Input {
 		if(validation) {
 			System.out.print(msg);
 			try {
-				return input.nextDouble();
+				String s = input.nextLine();
+				return Double.parseDouble(s);
 			} catch(Exception e) {
 				System.out.println("\n**Please Enter a number**");
 				System.out.println(e);

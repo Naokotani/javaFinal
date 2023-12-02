@@ -63,15 +63,13 @@ public class Books {
 
 	public double getBookPrice(int id) {
 		double price = 0.0;
-		for (Book i: books) {
-			if (id == i.book_id) {
-				price = i.price;
-			} 
-		}
-
-		if (price == 0.0) {
+		Book book = getBook(id);
+		if (book != null) {
+			price = book.price;
+		} else {
 			System.out.println("Book ID invalid: " + id);
 		}
+
 		return price;
 	}
 
@@ -153,14 +151,47 @@ public class Books {
 	public Book getBook(int id) {
 		for (Book i: books) {
 			if (id == i.book_id) {
+				System.out.println(i.title);
 				return i;
 			}
 		}
 		return null;
 	}
 
-	public String destroy() {
-		return "Not yet implemented";
+	public String destroy(Input in, int id) {
+		Book b = getBook(id);
+
+		System.out.println("id in destroy: " + id);
+		if (!in.validation) {
+
+			return "Book not found";
+		}
+		in.validation = true;
+
+		if (b != null) {
+			System.out.println("\n*****************\n\n");
+			System.out.println("ISBN: " + b.book_id);
+			System.out.println("Title: " + b.title);
+			System.out.println("Author name: " + b.author_name);
+			System.out.println("Genre: " + b.genre);
+			System.out.println("Price: " + b.price);
+			System.out.println("Quantity: " + b.quantity);
+			System.out.println("\n\n*****************\n");
+			System.out.println("Are you sure you want to delete" + b.title + "?");
+			System.out.println("y: delete, n: abort");
+		} else {
+			return "Book " + id + " not found";
+		}
+
+		while (true) {
+			char res = in.getChar("> ");
+			if (res == 'y') {
+				books.remove(b);
+				return "Book Deleted";
+			} else if (res == 'n'){
+				return "aborted";
+			}
+		}
 	}
 
 }
