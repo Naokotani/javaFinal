@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import entities.*;
 
 class InventoryManager{
@@ -13,7 +12,7 @@ class InventoryManager{
 			System.out.println("n: New, l: List, u: Update, s: Sales Report, d: Delete, e: Exit\n");
 			String options = "b: book, o: order\n";
 
-			switch (getRes(in)) {
+			switch (in.getChar("> ")) {
 			case 'n':
 				System.out.println("Which would you like to create?");
 				System.out.println(options);
@@ -47,10 +46,10 @@ class InventoryManager{
 			}
 		}
 		in.close();
-	} 
+	}
 
 	static void create(Input in, Books books, Orders orders){
-		switch (getRes(in)) {
+		switch (in.getChar("> ")) {
 		case 'b':
 			System.out.println(books.input(in));
 			break;
@@ -61,7 +60,7 @@ class InventoryManager{
 	}
 
 	static void read(Input in, Books books, Orders orders) {
-		switch (getRes(in)) {
+		switch (in.getChar("> ")) {
 		case 'b':
 			books.list();
 			break;
@@ -72,7 +71,7 @@ class InventoryManager{
 	}
 	
 	static void update(Input in, Books books, Orders orders) {
-		switch (getRes(in)) {
+		switch (in.getChar("> ")) {
 		case 'b':
 			books.list();
 			break;
@@ -83,22 +82,13 @@ class InventoryManager{
 	}
 	
 	static void destroy(Input in, Books books, Orders orders) {
-		switch (getRes(in)) {
+		switch (in.getChar("> ")) {
 		case 'b':
 			books.list();
 			break;
 		case 'o':
 			orders.list();
 			break;
-		}
-	}
-
-	static char getRes(Input in) {
-		try {
-			System.out.print("> ");
-			return in.getChar();
-		} catch(Exception e) {
-			return 'a';
 		}
 	}
 }

@@ -1,5 +1,4 @@
 package entities;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Orders {
@@ -27,18 +26,11 @@ public class Orders {
 	ArrayList<Order> orders = new ArrayList<>();
 
 	public String input(Input in, Books books) {
-		System.out.print("Order ID:");
-		int order_id = in.getInt();
-		System.out.print("Customer ID: ");
-		int customer_id = in.getInt();
-		System.out.print("Book ID: ");
-		int book_id = in.getInt();
-		System.out.print("Order date: ");
-		String order_date = in.getString();
-		System.out.print("Quantity: ");
-		int quantity = in.getInt();
-		String fail = "Order creation failed";
-
+		int order_id = in.getInt("Order ID: ");
+		int customer_id = in.getInt("Customer ID: ");
+		int book_id = in.getInt("Book ID: ");
+		String order_date = in.getString("Order Date: ");
+		int quantity = in.getInt("Quantity: ");
 
 		Boolean stockRemaining = books.updateStock(book_id, quantity);
 

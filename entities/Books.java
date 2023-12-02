@@ -25,19 +25,12 @@ public class Books {
 	ArrayList<Book> books = new ArrayList<>();
 
 	public String input(Input in) {
-		String fail = "Book creation failed";
-		System.out.print("ISBN: ");
-		int book_id = in.getInt();
-		System.out.print("Title: ");
-		String title = in.getString();
-		System.out.print("Author Name: ");
-		String author_name = in.getString();
-		System.out.print("Genre: ");
-		String genre = in.getString();
-		System.out.print("Price: ");
-		double price = in.getDouble();
-		System.out.print("Quantity: ");
-		int quantity = in.getInt();
+		int book_id = in.getInt("ISBN: ");
+		String title = in.getString("Title: ");
+		String author_name = in.getString("Author name: ");
+		String genre = in.getString("Genre: ");
+		double price = in.getDouble("Price: ");
+		int quantity = in.getInt("Quantity: ");
 
 		if (in.validation) {
 			Book book = new Book(title, book_id, author_name,
@@ -48,7 +41,7 @@ public class Books {
 		return "Book " + title + " created succesfully";
 		} else {
 			in.validation = true;
-			return fail;
+			return "\n**Book Creation Failed**\n";
 		}
 	} 
 
