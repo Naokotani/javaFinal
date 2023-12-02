@@ -26,62 +26,23 @@ public class Orders {
 
 	ArrayList<Order> orders = new ArrayList<>();
 
-	public String input(Scanner input, Books books) {
-		int order_id;
-		int customer_id;
-		int book_id;
-		String order_date;
-		int quantity;
+	public String input(Input in, Books books) {
+		System.out.print("Order ID:");
+		int order_id = in.getInt();
+		System.out.print("Customer ID: ");
+		int customer_id = in.getInt();
+		System.out.print("Book ID: ");
+		int book_id = in.getInt();
+		System.out.print("Order date: ");
+		String order_date = in.getString();
+		System.out.print("Quantity: ");
+		int quantity = in.getInt();
 		String fail = "Order creation failed";
 
-		try {
-		System.out.print("Order ID: ");
-		order_id = input.nextInt();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		try {
-		System.out.print("Customer ID: ");
-		customer_id = input.nextInt();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		try{
-		System.out.print("ISBN: ");
-		book_id = input.nextInt();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		try{
-		System.out.print("Order Date: ");
-		order_date = input.next();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-		
-		try {
-		System.out.print("quantity: ");
-		quantity = input.nextInt();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
 
 		Boolean stockRemaining = books.updateStock(book_id, quantity);
 
-		if (stockRemaining) {
+		if (stockRemaining && in.validation) {
 			Order order = new Order(order_id,
 									customer_id,
 									book_id,
@@ -91,8 +52,12 @@ public class Orders {
 
 			return "Order created successfully.\n\n" +
 				"**************************\n";
+		} else if (!in.validation){
+			in.validation = true;
+			return "Improper input";
 		} else {
 			return "Insufficient stock\n\n";
+
 		}
 
 	} 

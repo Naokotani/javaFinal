@@ -5,30 +5,29 @@ class InventoryManager{
 	public static void main(String[] args) {
 		Books books = new Books();
 		Orders orders = new Orders();
-		Scanner input = new Scanner(System.in);
+		Input in = new Input();
 		Boolean run = true;
 
 		while (run == true) {
 			System.out.println("Enter the correspoding letter to perform action.");
 			System.out.println("n: New, l: List, u: Update, s: Sales Report, d: Delete, e: Exit\n");
-			System.out.print("> ");
-			String options = "b: book, a: author, c: customer, o: order\n";
+			String options = "b: book, o: order\n";
 
-			switch (getRes(input)) {
+			switch (getRes(in)) {
 			case 'n':
 				System.out.println("Which would you like to create?");
 				System.out.println(options);
-				create(input, books, orders);
+				create(in, books, orders);
 				break;
 			case 'l':
 				System.out.println("Which would you like to list?");
 				System.out.println(options);
-				read(input, books, orders);
+				read(in, books, orders);
 				break;
 			case 'u':
 				System.out.println("Which would you like to update?");
 				System.out.println(options);
-				update(input, books, orders);
+				update(in, books, orders);
 				break;
 			case 's':
 				System.out.println(options);
@@ -41,28 +40,28 @@ class InventoryManager{
 			case 'd':
 				System.out.println("Which would you like to delete?");
 				System.out.println(options);
-				destroy(input, books, orders);
+				destroy(in, books, orders);
 				break;
 			case 'e':
 				run = false;
 			}
 		}
-		input.close();
+		in.close();
 	} 
 
-	static void create(Scanner input, Books books, Orders orders){
-		switch (getRes(input)) {
+	static void create(Input in, Books books, Orders orders){
+		switch (getRes(in)) {
 		case 'b':
-			books.input(input);
+			System.out.println(books.input(in));
 			break;
 		case 'o':
-			System.out.println(orders.input(input, books));
+			System.out.println(orders.input(in, books));
 			break;
 		}
 	}
 
-	static void read(Scanner input, Books books, Orders orders) {
-		switch (getRes(input)) {
+	static void read(Input in, Books books, Orders orders) {
+		switch (getRes(in)) {
 		case 'b':
 			books.list();
 			break;
@@ -72,8 +71,8 @@ class InventoryManager{
 		}
 	}
 	
-	static void update(Scanner input, Books books, Orders orders) {
-		switch (getRes(input)) {
+	static void update(Input in, Books books, Orders orders) {
+		switch (getRes(in)) {
 		case 'b':
 			books.list();
 			break;
@@ -83,8 +82,8 @@ class InventoryManager{
 		}
 	}
 	
-	static void destroy(Scanner input, Books books, Orders orders) {
-		switch (getRes(input)) {
+	static void destroy(Input in, Books books, Orders orders) {
+		switch (getRes(in)) {
 		case 'b':
 			books.list();
 			break;
@@ -94,10 +93,10 @@ class InventoryManager{
 		}
 	}
 
-	static char getRes(Scanner input) {
+	static char getRes(Input in) {
 		try {
 			System.out.print("> ");
-			return input.next().charAt(0);
+			return in.getChar();
 		} catch(Exception e) {
 			return 'a';
 		}

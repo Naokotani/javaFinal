@@ -1,5 +1,4 @@
 package entities;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 
@@ -25,72 +24,32 @@ public class Books {
 
 	ArrayList<Book> books = new ArrayList<>();
 
-	public String input(Scanner input) {
-		String title;
-		int book_id;
-		String author_name;
-		String genre;
-		double price;
-		int quantity;
-
+	public String input(Input in) {
 		String fail = "Book creation failed";
-
-		try {
 		System.out.print("ISBN: ");
-		book_id = input.nextInt();
-		input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail; 
-		}
-
-		try {
+		int book_id = in.getInt();
 		System.out.print("Title: ");
-		title = input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			title = "";
-			return fail;
-		}
-
-		try {
-		System.out.print("Author name: ");
-		author_name = input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		try {
+		String title = in.getString();
+		System.out.print("Author Name: ");
+		String author_name = in.getString();
 		System.out.print("Genre: ");
-		genre = input.nextLine();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		try {
+		String genre = in.getString();
 		System.out.print("Price: ");
-		price = input.nextDouble();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
+		double price = in.getDouble();
+		System.out.print("Quantity: ");
+		int quantity = in.getInt();
 
-		try {
-		System.out.print("Quanity: ");
-		quantity = input.nextInt();
-		} catch(Exception e) {
-			System.out.println(e);
-			return fail;
-		}
-
-		Book book = new Book(title, book_id, author_name,
-							 genre, price, quantity); 
-
+		if (in.validation) {
+			Book book = new Book(title, book_id, author_name,
+								 genre, price, quantity); 
+			
 		books.add(book);
-
+		
 		return "Book " + title + " created succesfully";
+		} else {
+			in.validation = true;
+			return fail;
+		}
 	} 
 
 	public void list(){
