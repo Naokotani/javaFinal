@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Orders {
-
 	class Order {
 		private int order_id;
 		private int customer_id;
@@ -28,7 +27,6 @@ public class Orders {
 	ArrayList<Order> orders = new ArrayList<>();
 
 	public String input(Scanner input, Books books) {
-
 		int order_id;
 		int customer_id;
 		int book_id;
