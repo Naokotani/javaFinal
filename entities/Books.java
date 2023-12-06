@@ -76,6 +76,7 @@ public class Books {
 	public Boolean updateStock(int id, int quantity) {
 		Boolean isStock = false;
 		Book b = getBook(id);
+		if (b == null) return isStock;
 		if (quantity <= b.quantity){
 			b.quantity -= quantity;
 			isStock = true;
@@ -177,7 +178,7 @@ public class Books {
 			System.out.println("Price: " + b.price);
 			System.out.println("Quantity: " + b.quantity);
 			System.out.println("\n\n*****************\n");
-			System.out.println("Are you sure you want to delete" + b.title + "?");
+			System.out.println("Are you sure you want to delete " + b.title + "?");
 			System.out.println("y: delete, n: abort");
 		} else {
 			return "Book " + id + " not found";

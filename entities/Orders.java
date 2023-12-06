@@ -55,13 +55,17 @@ public class Orders {
 	} 
 	
 	public void list(){
+		System.out.println("Orders list");
+		System.out.println("\n**************************\n");
 		for (Order i: orders) {
 			System.out.println("Order ID: " + i.order_id);
 			System.out.println("Customer ID: " + i.customer_id);
 			System.out.println("Book ID: " + i.book_id);
 			System.out.println("Date Ordered: " + i.order_date);
 			System.out.println("Quantity: " + i.quantity);
+			System.out.println("\n");
 		}
+		System.out.println("**************************\n");
 	}
 
 	public String[] sales(Books books) {
